@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //zad 1
+        let wiek= prompt("Podaj swoj wiek: ");
+        if (wiek>=18){
+            console.log("Jestes pelnoletni.");
+        } else {
+            console.log("Nie jestes pelnoletni.");
+        }
+        //zad 2
+        let temperatureC=prompt("podaj temperature w celcjuszu:");
+        let temperatureF = temperatureC*2+32;
+        console.log(temperatureF);
+        //zad 3
+        let liczby=[123,534,123,54,1,23];
+        //zsumuj wartosci
+        let suma = liczby.reduce((acc, curr) => acc + curr);
+        console.log("Suma liczb wynosi: " + suma);
+        //znajdz liczby parzyste
+        let parzyste = liczby.filter((liczba) => liczba % 2 === 0);
+        console.log("Liczby parzyste: " + parzyste);
+        //pomnoz wartosci razy 3
+        let pomnozone = liczby.map((liczba) => liczba *3);
+        console.log("Warosc pomnozona razy 3: " + pomnozone);
+        //dodaj do tablicy swoj numer albumu. Znajdz jego index w tablicy
+        let nralbumu = 67270;
+        liczby.push(nralbumu);
+        let.indexAlbumu= liczby.indexOf(nralbumu);
+        console.log("Index albumu w tablicy: "+ indexAlbumu)
+        //oblicz srednia arytmetyczna
+        let srednia = suma / liczby.length;
+        console.log("Srednia arytmetyczna: " + srednia);
+        //znajdz najwieksza liczbe
+        let najwieksza = Math.max(...liczby);
+        console.log("Najwieksza liczba: " + najwieksza);
+        //zlicz ilsoc wystapien wybranej wartosci
+        let wybranaWartosc = 7;
+        let iloscWystapien = liczby.filter((liczba) => liczba === wybranaWartosc).length;
+        console.log("ilosc wystapien : " + iloscWystapien)
+        //zad 4
+        let fib = [0,1];
+        for (let i=2; i < 100; i++) {
+            fib[i] = fib[i-1] + fib[i-2];
+        }
+        console.log(fib)
+        
+                    
+
+    </script>
+    
+</body>
+</html>
