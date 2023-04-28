@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Formularz rejestracji</title>
+  <style>
+    input[type="text"], input[type="email"], input[type="password"], select {
+      display: block;
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    
+    span.error {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+    <form action="submit-form.php" method="post">
+        <div>
+          <label for="first-name">Imię:</label>
+          <input type="text" id="first-name" name="first-name" required>
+        </div>
+        <div>
+          <label for="last-name">Nazwisko:</label>
+          <input type="text" id="last-name" name="last-name" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="password">Hasło:</label>
+          <input type="password" id="password" name="password" minlength="8" required>
+        </div>
+        <div>
+          <label for="gender">Płeć:</label>
+          <select id="gender" name="gender" required>
+            <option value="">Wybierz płeć</option>
+            <option value="Mężczyzna">Mężczyzna</option>
+            <option value="Kobieta">Kobieta</option>
+            <option value="Inna">Inna</option>
+          </select>
+        </div>
+        <div>
+          <label for="phone">Telefon:</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
+          <label for="birthdate">Data urodzenia:</label>
+          <input type="date" id="birthdate" name="birthdate" required>
+        </div>
+        <div>
+          <label for="country">Kraj:</label>
+          <input type="text" id="country" name="country" required>
+        </div>
+        <button type="submit">Zapisz</button>
+      </form>
+</body>
+<script>
+    const form = document.querySelector('form');
+    const firstName = document.getElementById('first-name');
+    const lastName = document.getElementById('last-name');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const gender = document.getElementById('gender');
+    const phone = document.getElementById('phone');
+    const birthdate = document.getElementById('birthdate');
+    const country = document.getElementById('country');
+
+    function checkRequired(input) {
+    if (input.value.trim() === '') {
+        input.setCustomValidity('Pole wymagane');
+        return false;
+    } else {
+        input.setCustomValidity('');
+        return true;
+    }
+    }
+
+    function checkLength(input, min, max) {
+    if (input.value.length < min || input.value.length > max) {
+        input.setCustomValidity(`Wprowadź od ${min} do ${max} znaków`);
+        return false;
+    } else {
+        input.setCustomValidity('');
+        return true;
+    }
+    }
+
+    function checkEmail(input) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(input.value)) {
+        input.setCustomValidity('');
+        return true;
+    } else {
+        input.setCustomValidity('Nieprawidłowy adres email');
+        return false;
+    }
+    }
+
+    function checkPassword(input) {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    if (passwordRegex.test(input.value)) {
+        input.setCustomValidity('');
+        return true;
+    } else {
+        input.setCustomValidity('Hasło musi zawierać co najmniej 8 znaków, w tym jedną dużą literę, jedną małą literę i jedną cyfrę');
+        return false;
+    }
+    }
+
+    function validateForm() {
+    let isValid = true;
+    isValid = checkRequired(firstName) && isValid;
+    isValid = checkRequired(lastName) && isValid;
+    isValid = checkRequired(email) && isValid;
+    isValid = checkLength(email, 6, 100) && isValid;
+    isValid = checkEmail(email) && isValid;
+    isValid = checkRequired(password) && isValid;
+    isValid = checkPassword(password) && isValid;
+    isValid = checkRequired(gender) && isValid;
+    isValid = checkRequired(phone) && isValid;
+    isValid = checkLength(phone, 9, 15) && isValid;
+    isValid = checkRequired(birthdate) && isValid;
+    isValid = checkRequired(country) && isValid;
+    return isValid;
+    }
+
+    form.addEventListener('submit', (event) => {
+    if (!validateForm()) {
+        event.preventDefault();
+    } else {
+        alert('Formularz został poprawnie wypełniony');
+    }
+    });
+
+</script>
+
+      
